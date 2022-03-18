@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+ const mongoose = require('mongoose');
 
 // Import of the model Recipe from './models/Recipe.model.js'
 const Recipe = require('./models/Recipe.model');
@@ -15,9 +15,21 @@ mongoose
     // Before adding any recipes to the database, let's remove all existing ones
     return Recipe.deleteMany()
   })
-  .then(() => {
+  .then(() => { 
     // Run your code here, after you have insured that the connection was made
+let newRecipe = {
+  title: "cheesecake" ,
+  level: "amateur chef",
+  ingredients:["sugar", "cheese", "sourcream", "eggs",],
+      cuisine: "Greek" ,
+      dishType: "dessert" ,
+      duration: 100,
+      creator: "frank"
+}
+return Recipe.create (newRecipe)
+    
   })
+  .then(newRecipeFromDB => console.log(`New recipe:${newRecipeFromDB.title}`))
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
